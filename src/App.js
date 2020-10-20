@@ -26,15 +26,15 @@ const patchRoutes = [
 const App = () => {
   getRoutes.forEach(route => {
     console.log(route)
-    api.get(route)
+    api.get(route).then(res => console.log(res.data))
   });
   postRoutes.forEach(route => {
     console.log(route)
-    api.post(route)
+    api.post(route).then(res => console.log(res.data));
   });
   patchRoutes.forEach(route => {
     console.log(route)
-    api.patch(route)
+    api.patch(route).then(res => console.log(res.data))
   });
   return (
     <div className='wrapper d-flex align-items-stretch'>
