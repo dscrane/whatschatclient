@@ -17,7 +17,11 @@ const SidebarChats = ({ auth, chatRooms, displayChatRooms, createChatRoom, close
           </div>
           <div className='col-8'>
             <div className='col text-center text-white' >
-              {key}
+              <div className='chatroom__chatroom'> {/*used to be the LINK tag*/}
+                <div className='col text-center'>
+                  {key}
+                </div>
+              </div>
             </div>
           </div>
           <div className='chatroom__cta-col'>

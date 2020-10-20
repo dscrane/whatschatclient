@@ -5,9 +5,9 @@ const ChatContainer = () => {
     <div className='chatroom__display bg-secondary'>
       <div className='chatroom__container'>
         <div className='chatroom__heading'>
-          {/*<h2 className='chatroom__title'>{chatRooms[chatRoomId].name}</h2>*/}
+          {/*<h2 className='chatroom__title'>{chatrooms[chatroomId].name}</h2>*/}
         </div>
-        {/*<ChatDisplay messages={chatRooms[chatRoomId].messages} systemMessage={systemMessage} />*/}
+        {/*<ChatDisplay messages={chatrooms[chatroomId].messages} systemMessage={systemMessage} />*/}
         <div className='chatroom__input mb-2 mx-auto'>
           <form className='w-100' >
             <div className='row '>
