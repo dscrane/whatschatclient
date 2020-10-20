@@ -1,2 +1,2 @@
-import { createBrowserHistory } from 'client/src/utils/history';
+import { createBrowserHistory } from 'history';
 export default createBrowserHistory();

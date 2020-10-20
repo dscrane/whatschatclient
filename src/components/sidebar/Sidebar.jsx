@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { IconButton, SidebarProfile, SidebarChats,  } from '../components';
+import { IconButton, SidebarProfile, SidebarChats,  } from '../../components';
 
 
-const Sidebar = () => {
+const Sidebar = (props) => {
   const [ activeIcon, setActiveIcon ] = useState('chats')
   const icons = ['profile', 'chats']
 
@@ -57,7 +57,7 @@ const Sidebar = () => {
           <div className='sidebar__break'></div>
         </div>
         <div className='sidebar__row'>
-          { renderSidebarContent() }
+          { props.auth ? renderSidebarContent() : <div>Sign In or Create an account to see available rooms and profile</div> }
         </div>
       </nav>
     </div>

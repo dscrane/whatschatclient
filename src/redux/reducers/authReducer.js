@@ -15,7 +15,16 @@ const INITIAL_STATE = {
 
 export default (state=INITIAL_STATE, action) => {
   switch (action.type) {
-
+    case CHECK_AUTH:
+      return {
+        ...state,
+        ...action.payload
+      }
+    case LOG_IN:
+      return {
+        ...state,
+        ...action.payload
+      }
     default:
       return state;
   }
