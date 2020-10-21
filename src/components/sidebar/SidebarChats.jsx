@@ -6,7 +6,7 @@ import { createChatroom } from '../../redux/actions/chat';
 import { setChatroom } from '../../redux/actions/auth';
 import { profileIcon } from "../../icons/icons";
 
-const SidebarChats = ({ auth, chatrooms, setChatroom, displayChatRooms, createChatroom, closeChat }) => {
+const SidebarChats = ({ auth, chatrooms, setChatroom, createChatroom, closeChat }) => {
   const [ newRoomName, setNewRoomName ] = useState('');
 
   const handleClose = (key) => {

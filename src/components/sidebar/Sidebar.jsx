@@ -31,13 +31,15 @@ const Sidebar = (props) => {
   }
 
   const renderSidebarContent = () => {
+    if (!props.auth) {
+      return <div>Sign In or Create an account to see available rooms and profile</div>
+    }
+
     if (activeIcon === 'profile') {
       return <SidebarProfile />
     }
     if (activeIcon === 'chats') {
       return <SidebarChats />
-    } else {
-      return <div>Sign In or Create an account to see available rooms and profile</div>
     }
   }
 

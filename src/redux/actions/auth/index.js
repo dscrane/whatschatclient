@@ -42,6 +42,33 @@ export const checkAuth = () => async dispatch => {
 }
 /* ----   ****    ---- */
 
+/* ----   SIGN_UP ACTION CREATOR    ---- */
+export const userSignup = (formValues) => async (dispatch) => {
+  const response = await api.post('/users/create', { ...formValues })
+  console.log(response)
+  if (response.data.error) {
+    const error = response.data.error;
+    if (error.code === 11000) {
+      alert(`The username "${error.keyValue.username}" has already been taken.`)
+    }
+    return
+  }
+
+  localStorage.setItem('jwt-token', response.data.token);
+  dispatch({
+             type: CHECK_AUTH,
+             payload: {
+               _id: response.data.user._id,
+               token: response.data.token,
+               isLoggedIn: true,
+               data: response.data.user
+             }
+           })
+
+  history.push(`/chats`)
+}
+/* ----   ****    ---- */
+
 /* ----   LOG_IN ACTION CREATOR    ---- */
 export const userLogin = formValues => async dispatch => {
   const response = await api.post(
@@ -87,6 +114,28 @@ export const userLogout = () => async (dispatch, getState) => {
   history.push('/')
 }
 /* ----   ****    ---- */
+
+export const userDelete = () => async (dispatch, getState) => {
+  const { token } = getState().auth;
+  const response = await api.post(
+    '/users/delete',
+    {},
+    {
+      headers: {
+      'Authorization': `Bearer ${token}`
+      }
+    }
+  )
+
+  if (response.data.userDeleted) {
+    await localStorage.removeItem('jwt-token');
+    dispatch({
+               type: LOG_OUT,
+             })
+    history.push('/')
+  }
+}
+
 
 /* ----   SET_CHATROOM ACTION CREATOR    ---- */
 export const setChatroom = (currentChatroom) => async dispatch => {

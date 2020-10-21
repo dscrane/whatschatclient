@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { SignupForm, LoginForm } from '../components';
-import { userLogin } from "../redux/actions/auth";
+import { userLogin, userSignup } from "../redux/actions/auth";
 import classNames from 'classnames';
 
 
-const Landing = (props) => {
+const Landing = ({ userLogin, userSignup }) => {
   const [activeForm, setActiveForm] = useState('signup');
 
   const handleSignup = (formValues) => {
-    // props.userSignup
+    userSignup(formValues)
   }
 
   const handleLogin = (formValues) => {
-    props.userLogin(formValues)
+    userLogin(formValues)
   }
 
   const updateCurrentForm = () => {
@@ -74,4 +74,4 @@ const Landing = (props) => {
   )
 }
 
-export default connect(null, { userLogin })(Landing);
+export default connect(null, { userLogin, userSignup })(Landing);

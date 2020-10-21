@@ -4,10 +4,10 @@ import moment from 'moment';
 import { connect } from 'react-redux';
 import { Field } from 'redux-form';
 import { ConfirmationModal, RenderForm } from '../../components';
-import { userLogout } from "../../redux/actions/auth";
+import { userLogout, userDelete } from "../../redux/actions/auth";
 import { pencilIcon } from "../../icons/icons";
 
-const SidebarProfile = ({ auth, userLogout, updateUser, deleteUser }) => {
+const SidebarProfile = ({ auth, userLogout, updateUser, userDelete }) => {
   const [ editing, setEditing ] = useState('')
   const [ modalDisplay, setModalDisplay ] = useState(false);
   const modalConfig = {
@@ -17,9 +17,9 @@ const SidebarProfile = ({ auth, userLogout, updateUser, deleteUser }) => {
     btnStyle: 'danger'
   }
 
-  // const handleDelete = () => {
-  //   deleteUser();
-  // }
+  const handleDelete = () => {
+    userDelete();
+  }
 
   const handleForm = (formValues) => {
     // updateUser(formValues)
@@ -115,7 +115,7 @@ const SidebarProfile = ({ auth, userLogout, updateUser, deleteUser }) => {
   return (
     <div className='d-flex flex-column m-3' style={{width: '90%'}}>
       {profileDisplay}
-      <ConfirmationModal modalConfig={modalConfig} setModalDisplay={setModalDisplay} modalDisplay={modalDisplay}  />
+      <ConfirmationModal modalConfig={modalConfig} setModalDisplay={setModalDisplay} modalDisplay={modalDisplay} handleDelete={handleDelete} />
     </div>
   )
 }
@@ -127,4 +127,4 @@ const mapStateToProps = state => {
 }
 
 
-export default connect(mapStateToProps, { userLogout })(SidebarProfile);
+export default connect(mapStateToProps, { userLogout, userDelete })(SidebarProfile);
