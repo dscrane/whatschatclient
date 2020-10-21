@@ -4,23 +4,23 @@ import { reduxForm } from "redux-form";
 const RenderForm = (props) => {
   const handleForm = formValues => {
     const {initialValues} = props;
-    //
+
     if (!initialValues) {
       return props.handleForm(formValues);
     }
-    //
-    // const valuesToValidate = Object.keys(formValues)
-    // if (valuesToValidate.some(value => formValues[value] === '')) {
-    //   props.reset();
-    // }
-    //
-    // let updateValues = {};
-    // Object.keys(initialValues).forEach((value) => {
-    //    if (initialValues[value] !== formValues[value]) {
-    //      updateValues = { ...updateValues,  [value]: formValues[value] }
-    //    }
-    // })
-    // props.handleForm(updateValues);
+
+    const valuesToValidate = Object.keys(formValues)
+    if (valuesToValidate.some(value => formValues[value] === '')) {
+      props.reset();
+    }
+
+    let updateValues = {};
+    Object.keys(initialValues).forEach((value) => {
+      if (initialValues[value] !== formValues[value]) {
+        updateValues = { ...updateValues,  [value]: formValues[value] }
+      }
+    })
+    props.handleForm(updateValues);
   }
 
   return (

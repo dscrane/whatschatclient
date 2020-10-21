@@ -128,6 +128,15 @@
     /*  ---  End Sidebar Chats  ---  */
 
     /*  ---  Sidebar Profile  ---  */
+        .profile__edit {
+          color: #a9b3c3;
+        }
+
+        .profile__edit:hover {
+          cursor: pointer;
+          color: #1d2124;
+        }
+
 
         .profile__submit {
           position: absolute;
@@ -304,15 +313,16 @@
       min-width: 675px;
       height: 95%;
       max-height: 98vh;
+      padding: 8px;
     }
 
     .chatroom__heading {
-      /*height: 15%;*/
       display: flex;
       justify-content: center;
     }
 
     .chatroom__title {
+      margin-top: 8px;
       color: white;
     }
 

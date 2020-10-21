@@ -40,10 +40,10 @@ const SidebarChats = ({ auth, chatrooms, setChatroom, createChatroom, closeChat 
           <div className='chatroom__icon col-2 my-auto text-secondary'>
             {profileIcon}
           </div>
-          <div className='col-8'>
+          <div className='col-8 px-0'>
             <div className='col text-center text-white' >
               <div onClick={() => renderChatroom(key)} className='chatroom__chatroom'> {/*used to be the LINK tag*/}
-                <div className='col text-center'>
+                <div className='col text-left'>
                   {chatrooms[key].name}
                 </div>
               </div>

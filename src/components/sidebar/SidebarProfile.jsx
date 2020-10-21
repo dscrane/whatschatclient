@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import moment from 'moment';
-// import _ from 'lodash';
+import _ from 'lodash';
 import { connect } from 'react-redux';
 import { Field } from 'redux-form';
 import { ConfirmationModal, RenderForm } from '../../components';
-import { userLogout, userDelete } from "../../redux/actions/auth";
-import { pencilIcon } from "../../icons/icons";
+import { userLogout, userDelete, userUpdate } from "../../redux/actions/auth";
+import { pencilIconFilled } from "../../icons/icons";
 
-const SidebarProfile = ({ auth, userLogout, updateUser, userDelete }) => {
+
+const SidebarProfile = ({ auth, userLogout, userUpdate, userDelete }) => {
   const [ editing, setEditing ] = useState('')
   const [ modalDisplay, setModalDisplay ] = useState(false);
   const modalConfig = {
@@ -22,7 +23,8 @@ const SidebarProfile = ({ auth, userLogout, updateUser, userDelete }) => {
   }
 
   const handleForm = (formValues) => {
-    // updateUser(formValues)
+    console.log('handle form ran')
+    userUpdate(formValues)
     setEditing('')
   }
 
@@ -51,8 +53,8 @@ const SidebarProfile = ({ auth, userLogout, updateUser, userDelete }) => {
               <input className='form-control text-left' {...input} /> :
               <input className='form-control-plaintext text-left' {...input} />}
           </div>
-          <div onClick={() => setEditing(label)} className='col-1 text-secondary'>
-            {pencilIcon}
+          <div onClick={() => setEditing(label)} className='profile__edit col-1'>
+            {pencilIconFilled}
           </div>
           {renderError(meta)}
         </div>
@@ -60,7 +62,6 @@ const SidebarProfile = ({ auth, userLogout, updateUser, userDelete }) => {
     )
   }
 
-    console.log('auth user', auth.user)
   const profileCard = () => {
     return (
       <>
@@ -75,7 +76,7 @@ const SidebarProfile = ({ auth, userLogout, updateUser, userDelete }) => {
             />
           </div>
           <div className='card-body'>
-            <RenderForm handleForm={handleForm} >
+            <RenderForm handleForm={handleForm} initialValues={_.pick(auth.user, 'name', 'username', 'email', 'password')}>
               <ul className='list-group list-group-flush'>
                 <Field name='name' component={renderInput} label='Name' />
                 <Field name='username' component={renderInput} label='Username' />
@@ -127,4 +128,4 @@ const mapStateToProps = state => {
 }
 
 
-export default connect(mapStateToProps, { userLogout, userDelete })(SidebarProfile);
+export default connect(mapStateToProps, { userLogout, userDelete, userUpdate })(SidebarProfile);

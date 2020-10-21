@@ -115,6 +115,37 @@ export const userLogout = () => async (dispatch, getState) => {
 }
 /* ----   ****    ---- */
 
+/* ----   UPDATE_USER ACTION CREATOR    ---- */
+export const userUpdate = formValues => async (dispatch, getState) => {
+  console.log('formValues', formValues)
+  const {token} = getState().auth;
+  const response = await api.patch(
+    './users/update',
+    {...formValues},
+    {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    }
+  );
+
+  if (response.data.error) {
+    const error = response.data.error;
+    if (error.code === 11000) {
+      alert(`The username "${error.keyValue.username}" has already been taken.`)
+    }
+    return
+  }
+
+  dispatch({
+             type: UPDATE_USER,
+             payload: response.data.user
+           })
+}
+
+/* ----   ****    ---- */
+
+/* ----   DELETE_USER ACTION CREATOR    ---- */
 export const userDelete = () => async (dispatch, getState) => {
   const { token } = getState().auth;
   const response = await api.post(
