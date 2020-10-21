@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import history from '../../utils/history';
 import { NewChatForm } from '../../components';
 import { createChatroom } from '../../redux/actions/chat';
+import { setChatroom } from '../../redux/actions/auth';
 import { profileIcon } from "../../icons/icons";
 
-const SidebarChats = ({ auth, chatrooms, displayChatRooms, createChatroom, closeChat }) => {
+const SidebarChats = ({ auth, chatrooms, setChatroom, displayChatRooms, createChatroom, closeChat }) => {
   const [ newRoomName, setNewRoomName ] = useState('');
-
 
   const handleClose = (key) => {
     closeChat(key)
@@ -24,7 +25,12 @@ const SidebarChats = ({ auth, chatrooms, displayChatRooms, createChatroom, close
     }
   }
 
-  const renderChatData = () => {
+  const renderChatroom = (chatroomId) => {
+    setChatroom(chatroomId)
+    history.push(`/chats/${chatroomId}`)
+  }
+
+  const renderChatroomList = () => {
     if (chatrooms === {}) {
       return
     }
@@ -36,7 +42,7 @@ const SidebarChats = ({ auth, chatrooms, displayChatRooms, createChatroom, close
           </div>
           <div className='col-8'>
             <div className='col text-center text-white' >
-              <div className='chatroom__chatroom'> {/*used to be the LINK tag*/}
+              <div onClick={() => renderChatroom(key)} className='chatroom__chatroom'> {/*used to be the LINK tag*/}
                 <div className='col text-center'>
                   {chatrooms[key].name}
                 </div>
@@ -53,22 +59,22 @@ const SidebarChats = ({ auth, chatrooms, displayChatRooms, createChatroom, close
     })
   }
 
-  const renderChats = () => {
+  const renderSidebarChats = () => {
     return (
       <ul className='chatroom__list list-unstyled'>
         <li className='chatroom__new'>
           <NewChatForm handleForm={handleForm} onChange={onChange} newRoomName={newRoomName} />
         </li>
-        {renderChatData()}
+        {renderChatroomList()}
       </ul>
     )
   }
 
-  const chatDisplay =  renderChats()
+
 
   return (
     <div className='chatroom__list my-3'>
-      {chatDisplay}
+      {renderSidebarChats()}
     </div>
   )
 }
@@ -80,4 +86,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { createChatroom })(SidebarChats);
+export default connect(mapStateToProps, { createChatroom, setChatroom })(SidebarChats);

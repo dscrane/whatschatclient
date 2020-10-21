@@ -23,6 +23,19 @@ export default (state = INITIAL_STATE, action) => {
           ...action.payload
         }
       }
+    case FETCH_MESSAGES:
+      console.log('state', state[action.payload.chatroomId])
+      console.log('fetch action', action.payload.chatroomId)
+      return {
+        ...state,
+        [action.payload.chatroomId]: {
+          ...state[action.payload.chatroomId],
+          messages: [
+            ...state[action.payload.chatroomId].messages,
+            ...action.payload.messages
+          ]
+        }
+      }
     default:
       return state
   }

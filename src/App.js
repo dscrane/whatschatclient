@@ -17,7 +17,7 @@ const App = ({ auth, checkAuth, fetchChatrooms }) => {
     if (auth.isLoggedIn) {
       fetchChatrooms();
     }
-  }, [auth.isLoggedIn, checkAuth])
+  }, [auth.isLoggedIn, checkAuth, fetchChatrooms])
   return (
     <div className='wrapper d-flex align-items-stretch'>
       <Router history={history}>

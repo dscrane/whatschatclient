@@ -3,11 +3,14 @@ import { store } from '../../../utils/store';
 import history from "../../../utils/history";
 import {
   FETCH_CHATROOMS,
+  SET_CHATROOM,
   NEW_MESSAGE,
-  LOAD_MESSAGES,
+  FETCH_MESSAGES,
   CLOSE_CHAT,
   CREATE_CHATROOM
 } from '../../types'
+
+
 
 
 
@@ -50,5 +53,14 @@ export const createChatroom = (name, userId) => async dispatch => {
                error: 'Invalid Name'
              })
   }
+}
+/* ----   ****    ---- */
+
+/* ----   FETCH_MESSAGES ACTION CREATOR    ---- */
+export const fetchMessages = (chatroomId) => async dispatch => {
+  console.log(chatroomId)
+  const { data } = await api.get(`/messages/fetch?chatroomId=${chatroomId}`);
+  console.log(data)
+  dispatch({ type: FETCH_MESSAGES, payload: {chatroomId, messages: data.messages }})
 }
 /* ----   ****    ---- */

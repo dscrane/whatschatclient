@@ -4,6 +4,7 @@ import {
   CHECK_AUTH,
   LOG_IN,
   LOG_OUT,
+  SET_CHATROOM,
   UPDATE_USER
 } from '../../types';
 
@@ -84,5 +85,14 @@ export const userLogout = () => async (dispatch, getState) => {
   })
 
   history.push('/')
+}
+/* ----   ****    ---- */
+
+/* ----   SET_CHATROOM ACTION CREATOR    ---- */
+export const setChatroom = (currentChatroom) => async dispatch => {
+  dispatch({
+    type: SET_CHATROOM,
+    payload: { currentChatroom }
+  })
 }
 /* ----   ****    ---- */
