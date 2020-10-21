@@ -12,7 +12,7 @@
       flex-direction: column;
       min-height: 100vh;
       align-content: space-around;
-      width: 90%;
+      width: 99%;
     }
 
     .sidebar__list {
@@ -33,6 +33,7 @@
     }
     /*  --- Sidebar Chatroom Styles  ---  */
         .chatroom__list {
+          margin: 8px 0;
           display: flex;
           flex-direction: column;
           width: 100%;
@@ -43,6 +44,7 @@
           display: flex;
           justify-content: space-around;
           width: 90%;
+          border-bottom: 1px solid #818181;
         }
 
         .chatroom__icon {
@@ -58,11 +60,16 @@
           color: white;
           text-decoration: none;
           height: 8vh;
-          border-bottom: 1px solid white;
           outline: none;
         }
 
+        .chatroom__item:hover {
+          cursor: pointer;
+          background-color: #454b58;
+        }
+
         .chatroom__form {
+          padding-bottom: 16px;
           display: flex;
           justify-content: center;
           align-items: center;
@@ -70,13 +77,14 @@
           color: white;
           text-decoration: none;
           width: 100%;
-          height: 8vh;
+          height: 5vh;
           border-bottom: 1px solid white;
         }
 
         .chatroom__new {
           display: flex;
           justify-content: center;
+          align-content: center;
           width: 90%;
         }
 
@@ -120,6 +128,7 @@
     /*  ---  End Sidebar Chats  ---  */
 
     /*  ---  Sidebar Profile  ---  */
+
         .profile__submit {
           position: absolute;
           left: -9999px;
@@ -202,8 +211,7 @@
     /*  ---  Chat Message Styles  ---  */
         .chat__messages {
           display: flex;
-          margin-bottom: 5px;
-
+          margin-bottom: 2px;
         }
 
         .chat__messages-rec {
@@ -235,6 +243,7 @@
           align-self: start;
           text-align: left;
           color: white;
+          padding: 2px 6px
         }
 
 
@@ -266,7 +275,7 @@
           display: flex;
           flex-direction: column;
           justify-content: end;
-          padding: 0 1px 0 0;
+          padding: 0 10px 0 0;
           width: 100%;
           font-size: 10px;
         }

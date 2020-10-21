@@ -18,7 +18,6 @@ import {
 export const fetchChatrooms = () => async (dispatch, getState) => {
   try {
     const response = await api.get('/chatrooms/fetch');
-    console.log(response)
 
     const chatrooms = response.data.chats.map(chat => {
       const messages = getState().chatrooms.length !== 0 ? getState().chatrooms[chat._id].messages : [];
@@ -58,7 +57,7 @@ export const createChatroom = (name, userId) => async dispatch => {
 
 /* ----   FETCH_MESSAGES ACTION CREATOR    ---- */
 export const fetchMessages = (chatroomId) => async dispatch => {
-  console.log(chatroomId)
+
   const { data } = await api.get(`/messages/fetch?chatroomId=${chatroomId}`);
   console.log(data)
   dispatch({ type: FETCH_MESSAGES, payload: {chatroomId, messages: data.messages }})

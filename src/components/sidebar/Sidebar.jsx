@@ -36,6 +36,8 @@ const Sidebar = (props) => {
     }
     if (activeIcon === 'chats') {
       return <SidebarChats />
+    } else {
+      return <div>Sign In or Create an account to see available rooms and profile</div>
     }
   }
 
@@ -57,7 +59,7 @@ const Sidebar = (props) => {
           <div className='sidebar__break'></div>
         </div>
         <div className='sidebar__row'>
-          { props.auth ? renderSidebarContent() : <div>Sign In or Create an account to see available rooms and profile</div> }
+          {renderSidebarContent()}
         </div>
       </nav>
     </div>

@@ -10,14 +10,9 @@ const ChatContainer = ({ auth, chatrooms, fetchMessages }) => {
 
   useEffect(() => {
     Object.keys(chatrooms).forEach((chatroom) => {
-      console.log(chatroom)
       fetchMessages(chatroom)
     })
   }, [])
-
-
-
-
 
   const onChange = e => {
     setMessage(e.target.value)

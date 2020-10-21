@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-// import moment from 'moment';
+import moment from 'moment';
 // import _ from 'lodash';
 import { connect } from 'react-redux';
 import { Field } from 'redux-form';
@@ -60,19 +60,19 @@ const SidebarProfile = ({ auth, userLogout, updateUser, deleteUser }) => {
     )
   }
 
+    console.log('auth user', auth.user)
   const profileCard = () => {
     return (
       <>
-        <div className='card'>
-          <div className='card-img-top mx-auto'>
+        <div className='card profile__card'>
+          <div className='card-img-top d-flex justify-content-center'>
             <img
-              className='mx-auto mt-3'
-              // src={`data:image/png;base64,${auth.data.avatar}`}
+              className='mt-3'
+              src={`data:image/png;base64,${auth.user.avatar}`}
               height='150'
               width='150'
               alt='avatar'
             />
-
           </div>
           <div className='card-body'>
             <RenderForm handleForm={handleForm} >
@@ -84,7 +84,7 @@ const SidebarProfile = ({ auth, userLogout, updateUser, deleteUser }) => {
                 <li className='list-group-item'>
                   <div className='row justify-content-around'>
                     <div className='col text-center'>
-                      User Since:
+                      User Since: {moment(auth.user.createdAt).format("MMM 'YY")}
                     </div>
                   </div>
                 </li>
@@ -94,13 +94,13 @@ const SidebarProfile = ({ auth, userLogout, updateUser, deleteUser }) => {
                      tabIndex="-1"/>
             </RenderForm>
             <ul className='list-group list-group-flush'>
-              <li className='list-group-item'>
+              <li className='list-group-item m-auto'>
                 <button onClick={() => {userLogout()}} className='btn btn-secondary mt-2'>
                   Log Out
                 </button>
               </li>
-              <li className='list-group-item '>
-                <button onClick={() => setModalDisplay(true)} className='btn btn-danger' >Delete Account</button>
+              <li className='list-group-item m-auto'>
+                <button onClick={() => setModalDisplay(true)} className='btn btn-danger' disabled={auth.user._id === '5f637fdd0a41ae691c828e50'}>Delete Account</button>
               </li>
             </ul>
           </div>

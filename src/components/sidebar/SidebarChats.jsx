@@ -73,7 +73,7 @@ const SidebarChats = ({ auth, chatrooms, setChatroom, displayChatRooms, createCh
 
 
   return (
-    <div className='chatroom__list my-3'>
+    <div className='chatroom__list'>
       {renderSidebarChats()}
     </div>
   )

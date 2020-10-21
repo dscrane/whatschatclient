@@ -18,7 +18,10 @@ const NewChatForm = (props) => {
       <div
         className='chatroom__form'
       >
-        <div className='d-flex justify-content-end col-3 mx-auto'>
+        <div className='col-10'>
+          <input onChange={onChange} className={`form-control ${errorStyle}`} type='text' placeholder={'Create Chat Room....'} name='chatForm' required/>
+        </div>
+        <div className='d-flex justify-content-end col-2 mx-auto'>
           <button
             type='submit'
             className='chatroom__cta-new btn p-0'
@@ -27,9 +30,6 @@ const NewChatForm = (props) => {
               {plusIcon}
             </div>
           </button>
-        </div>
-        <div className='col-9'>
-          <input onChange={onChange} className={`form-control ${errorStyle}`} type='text' placeholder={'Create Chat Room....'} name='chatForm' required/>
         </div>
       </div>
     </form>

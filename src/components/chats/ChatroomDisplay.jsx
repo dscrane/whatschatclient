@@ -56,8 +56,8 @@ const ChatroomDisplay = ({ messages, auth }) => {
         return (
           <li key={messageKey} className='chat__messages chat__messages-rec'>
             <div className="chat__bubble chat__bubble-rec">
-              <div className={`chat__content px-2 py-1`}>
-                <div className={`chat__area py-0 mr-1`}>
+              <div className={`chat__content`}>
+                <div className={`chat__area`}>
                   <p className='chat__text chat__text-author' >
                     {messages[messageKey].author}
                   </p>
@@ -77,8 +77,8 @@ const ChatroomDisplay = ({ messages, auth }) => {
       return (
         <li key={messageKey} className='chat__messages chat__messages-sent'>
           <div className="chat__bubble chat__bubble-sent">
-            <div className={`chat__content px-2 py-1`}>
-              <div className={`chat__area py-0 mr-1`}>
+            <div className={`chat__content`}>
+              <div className={`chat__area`}>
                 <p className='chat__text chat__text-message'>{messages[messageKey].message}</p>
               </div>
               <div className={`chat__footer ml-1 text-white`}>
