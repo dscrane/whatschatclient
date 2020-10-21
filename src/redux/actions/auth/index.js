@@ -63,3 +63,26 @@ export const userLogin = formValues => async dispatch => {
   history.push('/chats')
 }
 /* ----   ****    ---- */
+
+/* ----   LOG_OUT ACTION CREATOR    ---- */
+export const userLogout = () => async (dispatch, getState) => {
+  const { token } = getState().auth
+
+  await api.post(
+    '/users/logout',
+    {},
+    {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    }
+  )
+  await localStorage.removeItem('jwt-token');
+
+  dispatch({
+    type: LOG_OUT,
+  })
+
+  history.push('/')
+}
+/* ----   ****    ---- */

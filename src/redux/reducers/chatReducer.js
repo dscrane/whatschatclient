@@ -16,6 +16,13 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         ..._.mapKeys(action.payload, '_id')
       }
+    case CREATE_CHATROOM:
+      return {
+        ...state,
+        [action.payload._id]: {
+          ...action.payload
+        }
+      }
     default:
       return state
   }

@@ -6,7 +6,7 @@ import {
   NEW_MESSAGE,
   LOAD_MESSAGES,
   CLOSE_CHAT,
-  ADD_CHATROOM
+  CREATE_CHATROOM
 } from '../../types'
 
 
@@ -28,6 +28,27 @@ export const fetchChatrooms = () => async (dispatch, getState) => {
     })
   } catch(e) {
     console.log(e)
+  }
+}
+/* ----   ****    ---- */
+
+/* ----   ADD_CHATROOM ACTION CREATOR    ---- */
+export const createChatroom = (name, userId) => async dispatch => {
+  try {
+    const { data } = await api.post(
+      '/chatrooms/create',
+      { name, createdBy: userId }
+    )
+    dispatch({
+               type: CREATE_CHATROOM,
+               payload: {...data.chat, messages: []}
+             })
+    history.push(`/chats/${data.chat._id}`)
+  } catch (e) {
+    dispatch({
+               type: 'ERROR',
+               error: 'Invalid Name'
+             })
   }
 }
 /* ----   ****    ---- */

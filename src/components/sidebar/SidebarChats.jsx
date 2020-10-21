@@ -1,15 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { NewChatForm } from '../../components';
+import { createChatroom } from '../../redux/actions/chat';
 import { profileIcon } from "../../icons/icons";
 
-const SidebarChats = ({ auth, chatRooms, displayChatRooms, createChatRoom, closeChat }) => {
+const SidebarChats = ({ auth, chatrooms, displayChatRooms, createChatroom, closeChat }) => {
+  const [ newRoomName, setNewRoomName ] = useState('');
 
-  const chatrooms = ['Room 1', 'Room 2', 'Room 3']
+
+  const handleClose = (key) => {
+    closeChat(key)
+  }
+
+  const onChange = (e) => {
+    setNewRoomName(e.target.value)
+  }
+
+  const handleForm = (e) => {
+    e.preventDefault()
+    if (newRoomName.length >= 5) {
+      createChatroom(newRoomName, auth._id)
+      setNewRoomName('')
+    }
+  }
+
   const renderChatData = () => {
-    if (chatRooms === {}) {
+    if (chatrooms === {}) {
       return
     }
-    return chatrooms.map(key => {
+    return Object.keys(chatrooms).map(key => {
       return (
         <li key={key} className='chatroom__item'>
           <div className='chatroom__icon col-2 my-auto text-secondary'>
@@ -19,7 +38,7 @@ const SidebarChats = ({ auth, chatRooms, displayChatRooms, createChatRoom, close
             <div className='col text-center text-white' >
               <div className='chatroom__chatroom'> {/*used to be the LINK tag*/}
                 <div className='col text-center'>
-                  {key}
+                  {chatrooms[key].name}
                 </div>
               </div>
             </div>
@@ -38,7 +57,7 @@ const SidebarChats = ({ auth, chatRooms, displayChatRooms, createChatRoom, close
     return (
       <ul className='chatroom__list list-unstyled'>
         <li className='chatroom__new'>
-
+          <NewChatForm handleForm={handleForm} onChange={onChange} newRoomName={newRoomName} />
         </li>
         {renderChatData()}
       </ul>
@@ -57,8 +76,8 @@ const SidebarChats = ({ auth, chatRooms, displayChatRooms, createChatRoom, close
 const mapStateToProps = (state) => {
   return {
     auth: state.auth,
-    chatRooms: state.chatRooms
+    chatrooms: state.chatrooms
   }
 }
 
-export default connect(mapStateToProps, {  })(SidebarChats);
+export default connect(mapStateToProps, { createChatroom })(SidebarChats);

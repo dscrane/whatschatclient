@@ -4,10 +4,10 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Field } from 'redux-form';
 import { ConfirmationModal, RenderForm } from '../../components';
-// import { logout, updateUser, deleteUser } from "../../redux/actions/auth";
+import { userLogout } from "../../redux/actions/auth";
 import { pencilIcon } from "../../icons/icons";
 
-const SidebarProfile = ({ auth, logout, updateUser, deleteUser }) => {
+const SidebarProfile = ({ auth, userLogout, updateUser, deleteUser }) => {
   const [ editing, setEditing ] = useState('')
   const [ modalDisplay, setModalDisplay ] = useState(false);
   const modalConfig = {
@@ -95,7 +95,7 @@ const SidebarProfile = ({ auth, logout, updateUser, deleteUser }) => {
             </RenderForm>
             <ul className='list-group list-group-flush'>
               <li className='list-group-item'>
-                <button  className='btn btn-secondary mt-2'>
+                <button onClick={() => {userLogout()}} className='btn btn-secondary mt-2'>
                   Log Out
                 </button>
               </li>
@@ -127,4 +127,4 @@ const mapStateToProps = state => {
 }
 
 
-export default connect(mapStateToProps, {  })(SidebarProfile);
+export default connect(mapStateToProps, { userLogout })(SidebarProfile);

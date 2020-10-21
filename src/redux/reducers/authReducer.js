@@ -25,6 +25,11 @@ export default (state=INITIAL_STATE, action) => {
         ...state,
         ...action.payload
       }
+    case LOG_OUT:
+      return {
+        ...state,
+        ...INITIAL_STATE
+      };
     default:
       return state;
   }
