@@ -23,7 +23,6 @@ const SidebarProfile = ({ auth, userLogout, userUpdate, userDelete }) => {
   }
 
   const handleForm = (formValues) => {
-    console.log('handle form ran')
     userUpdate(formValues)
     setEditing('')
   }

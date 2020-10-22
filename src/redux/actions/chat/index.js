@@ -16,14 +16,10 @@ import {
 
 /* ----   FETCH_CHATROOMS ACTION CREATOR    ---- */
 export const fetchChatrooms = () => async (dispatch, getState) => {
-  console.log('get state', getState())
   try {
     const response = await api.get('/chatrooms/fetch');
-
     const chatrooms = response.data.chatrooms.map(chatroom => {
-      console.log('response chatroom', chatroom)
       const messages = getState().chatrooms.length !== 0 ? getState().chatrooms[chatroom._id].messages : [];
-      console.log('fetchChatroom messages', messages)
       return { ...chatroom, messages: [...messages] }
     })
 
@@ -45,24 +41,22 @@ export const createChatroom = (name, userId) => async dispatch => {
       { name, createdBy: userId }
     )
     dispatch({
-               type: CREATE_CHATROOM,
-               payload: {...data.chatroom, messages: []}
-             })
+      type: CREATE_CHATROOM,
+      payload: {...data.chatroom, messages: []}
+    })
     history.push(`/chats/${data.chatroom._id}`)
   } catch (e) {
     dispatch({
-               type: 'ERROR',
-               error: 'Invalid Name'
-             })
+      type: 'ERROR',
+      error: 'Invalid Name'
+    })
   }
 }
 /* ----   ****    ---- */
 
 /* ----   FETCH_MESSAGES ACTION CREATOR    ---- */
 export const fetchMessages = (chatroomId) => async dispatch => {
-
   const { data } = await api.get(`/messages/fetch?chatroomId=${chatroomId}`);
-  console.log(data)
   dispatch({ type: FETCH_MESSAGES, payload: {chatroomId, messages: data.messages }})
 }
 /* ----   ****    ---- */

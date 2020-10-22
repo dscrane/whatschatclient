@@ -2,7 +2,6 @@ import api from '../../../utils/api';
 import history from '../../../utils/history';
 import {
   CHECK_AUTH,
-  LOG_IN,
   LOG_OUT,
   SET_CHATROOM,
   UPDATE_USER
@@ -45,7 +44,7 @@ export const checkAuth = () => async dispatch => {
 /* ----   SIGN_UP ACTION CREATOR    ---- */
 export const userSignup = (formValues) => async (dispatch) => {
   const response = await api.post('/users/create', { ...formValues })
-  console.log(response)
+
   if (response.data.error) {
     const error = response.data.error;
     if (error.code === 11000) {
@@ -117,7 +116,6 @@ export const userLogout = () => async (dispatch, getState) => {
 
 /* ----   UPDATE_USER ACTION CREATOR    ---- */
 export const userUpdate = formValues => async (dispatch, getState) => {
-  console.log('formValues', formValues)
   const {token} = getState().auth;
   const response = await api.patch(
     './users/update',

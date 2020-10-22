@@ -1,12 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import {ChatContainer} from "../components/chats";
+import { ChatContainer } from "../components/chats";
 
 
 const Chatroom = ({ chatrooms }) => {
-
-   const renderChatContainer = chatrooms.length !== 0 ? <ChatContainer /> : <div>Click on a chat room to enter</div>
-
+  const renderChatContainer = chatrooms.length !== 0 ? <ChatContainer /> : <div>Click on a chat room to enter</div>
   return(
     <>
       {renderChatContainer}
