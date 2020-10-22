@@ -1,7 +1,6 @@
-import React, { useRef, useEffect } from 'react';
-import moment from 'moment';
-import { connect } from 'react-redux';
-
+import React, { useRef, useEffect } from "react";
+import moment from "moment";
+import { connect } from "react-redux";
 
 const ChatroomDisplay = ({ messages, auth }) => {
   const messageList = useRef(null);
@@ -10,12 +9,15 @@ const ChatroomDisplay = ({ messages, auth }) => {
     // new message element
     const newMessage = messageList.current.lastElementChild;
 
-    if (!newMessage) {return};
+    if (!newMessage) {
+      return;
+    }
 
     // get the height of the newMessage
     const newMessageStyles = getComputedStyle(newMessage.lastElementChild);
     const newMessageMargin = parseInt(newMessageStyles.marginBottom);
-    const newMessageHeight = messageList.current.offsetHeight + newMessageMargin;
+    const newMessageHeight =
+      messageList.current.offsetHeight + newMessageMargin;
 
     // get the visible height
     const visibleHeight = messageList.current.offsetHeight;
@@ -32,81 +34,88 @@ const ChatroomDisplay = ({ messages, auth }) => {
     }
   };
 
-  useEffect(autoscroll, [messages.length])
-
+  useEffect(autoscroll, [messages.length]);
 
   const formatTimestamp = (createdAt) => {
-    return moment(createdAt).format('h:mm A');
-  }
+    return moment(createdAt).format("h:mm A");
+  };
 
   const renderMessages = () => {
-    const messageKeysArray = Object.keys(messages) ;
+    const messageKeysArray = Object.keys(messages);
 
-    return messageKeysArray.map(messageKey => {
-      const timestamp = formatTimestamp(messages[messageKey].createdAt)
-      if (messages[messageKey].author === 'systemManager') {
+    return messageKeysArray.map((messageKey) => {
+      const timestamp = formatTimestamp(messages[messageKey].createdAt);
+      if (messages[messageKey].author === "systemManager") {
         return (
-          <li key={Math.random()*1000} className='chat__message chat__message-system'>
-            <div key={messageKey} className='text-white text-left'>{messages[messageKey].message}</div>
+          <li
+            key={Math.random() * 1000}
+            className="chat__message chat__message-system"
+          >
+            <div key={messageKey} className="text-white text-left">
+              {messages[messageKey].message}
+            </div>
           </li>
-        )
+        );
       }
 
       if (messages[messageKey].userId !== auth._id) {
         return (
-          <li key={messageKey} className='chat__messages chat__messages-rec'>
+          <li key={messageKey} className="chat__messages chat__messages-rec">
             <div className="chat__bubble chat__bubble-rec">
               <div className={`chat__content`}>
                 <div className={`chat__area`}>
-                  <p className='chat__text chat__text-author' >
+                  <p className="chat__text chat__text-author">
                     {messages[messageKey].author}
                   </p>
-                  <p className='chat__text chat__text-message'>{messages[messageKey].message}</p>
+                  <p className="chat__text chat__text-message">
+                    {messages[messageKey].message}
+                  </p>
                 </div>
                 <div className={`chat__footer ml-1`}>
-                  <div className='chat__timestamp'>
-                    {timestamp}
-                  </div>
+                  <div className="chat__timestamp">{timestamp}</div>
                 </div>
               </div>
             </div>
           </li>
-        )
+        );
       }
 
       return (
-        <li key={messageKey} className='chat__messages chat__messages-sent'>
+        <li key={messageKey} className="chat__messages chat__messages-sent">
           <div className="chat__bubble chat__bubble-sent">
             <div className={`chat__content`}>
               <div className={`chat__area`}>
-                <p className='chat__text chat__text-message'>{messages[messageKey].message}</p>
+                <p className="chat__text chat__text-message">
+                  {messages[messageKey].message}
+                </p>
               </div>
               <div className={`chat__footer ml-1 text-white`}>
-                <div className='chat__timestamp'>
-                  {timestamp}
-                </div>
+                <div className="chat__timestamp">{timestamp}</div>
               </div>
             </div>
           </div>
         </li>
-      )
-    })
-  }
+      );
+    });
+  };
 
   return (
-    <div className='chat__container'>
-      <ul className='chat__display chat__display-scroll ' ref={messageList}>
-        {messages ? renderMessages() : <div className='text-white'>Send a message!!</div>}
+    <div className="chat__container">
+      <ul className="chat__display chat__display-scroll " ref={messageList}>
+        {messages ? (
+          renderMessages()
+        ) : (
+          <div className="text-white">Send a message!!</div>
+        )}
       </ul>
     </div>
+  );
+};
 
-  )
-}
-
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    auth: state.auth
-  }
-}
+    auth: state.auth,
+  };
+};
 
 export default connect(mapStateToProps)(ChatroomDisplay);

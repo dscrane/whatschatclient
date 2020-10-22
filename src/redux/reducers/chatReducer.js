@@ -1,29 +1,29 @@
-import _ from 'lodash'
+import _ from "lodash";
 import {
   CREATE_CHATROOM,
   FETCH_CHATROOMS,
-  SEND_MESSAGE,
+  RECEIVE_MESSAGE,
   FETCH_MESSAGES,
   CLOSE_CHAT,
-  LOG_OUT
-} from '../types';
+  LOG_OUT,
+} from "../types";
 
 const INITIAL_STATE = [];
 
 export default (state = INITIAL_STATE, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case FETCH_CHATROOMS:
       return {
         ...state,
-        ..._.mapKeys(action.payload, '_id')
-      }
+        ..._.mapKeys(action.payload, "_id"),
+      };
     case CREATE_CHATROOM:
       return {
         ...state,
         [action.payload._id]: {
-          ...action.payload
-        }
-      }
+          ...action.payload,
+        },
+      };
     case FETCH_MESSAGES:
       return {
         ...state,
@@ -31,15 +31,24 @@ export default (state = INITIAL_STATE, action) => {
           ...state[action.payload.chatroomId],
           messages: [
             ...state[action.payload.chatroomId].messages,
-            ...action.payload.messages
+            ...action.payload.messages,
+          ],
+        },
+      };
+    case RECEIVE_MESSAGE:
+      return {
+        ...state,
+        [action.payload.chatroomId]: {
+          ...state[action.payload.chatroomId],
+          messages: [
+            ...state[action.payload.chatroomId].messages,
+            action.payload.message
           ]
         }
       }
     case LOG_OUT:
-      return [
-       ...INITIAL_STATE
-      ]
+      return [...INITIAL_STATE];
     default:
-      return state
+      return state;
   }
-}
+};
