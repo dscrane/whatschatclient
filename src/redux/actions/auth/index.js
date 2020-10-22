@@ -5,6 +5,7 @@ import { CHECK_AUTH, LOG_OUT, SET_CHATROOM, UPDATE_USER } from "../../types";
 /* ----   CHECK_AUTH ACTION CREATOR    ---- */
 export const checkAuth = () => async (dispatch) => {
   const token = localStorage.getItem("jwt-token");
+  console.log(token);
   if (!token) {
     return dispatch({
       type: CHECK_AUTH,

@@ -11,6 +11,7 @@ import "./styles/bootstrap.min.css";
 import "./styles/styles.css";
 
 const App = ({ auth, checkAuth, fetchChatrooms }) => {
+  useEffect(() => checkAuth(), []);
   useEffect(() => {
     checkAuth();
     if (auth.isLoggedIn) {

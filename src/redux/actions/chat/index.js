@@ -66,18 +66,13 @@ export const fetchMessages = (chatroomId) => async (dispatch) => {
 
 /* ----   JOIN_CHATROOM ACTION CREATOR    ---- */
 export const joinChatroom = (chatroomId, username) => async (dispatch) => {
-  console.log("join emitter ran");
-  socket.emit("join", { room: chatroomId, username: username }, (room) => {
-    console.info(`connected to ${room}`);
-  });
+  socket.emit("join", { room: chatroomId, username: username }, (room) => {});
 };
 /* ----   ****    ---- */
 
 /* ----   LEAVE_CHATROOM ACTION CREATOR    ---- */
 export const leaveChatroom = (chatroomId, username) => async (dispatch) => {
-  socket.emit("leave", { room: chatroomId, username: username }, (room) => {
-    console.info(`disconnected from ${room}`);
-  });
+  socket.emit("leave", { room: chatroomId, username: username }, (room) => {});
 };
 /* ----   ****    ---- */
 
