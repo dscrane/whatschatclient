@@ -234,6 +234,7 @@
 
         .chat__messages-system {
           justify-content: center;
+          color: #69747a;
         }
 
         .chat__bubble {
