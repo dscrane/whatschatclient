@@ -1,10 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { IconButton, SidebarProfile, SidebarChats,  } from '../../components';
 
 
 const Sidebar = (props) => {
   const [ activeIcon, setActiveIcon ] = useState('chats')
   const icons = ['profile', 'chats']
+
+  useEffect(() => {
+    return () => {
+      setActiveIcon('chats')
+    }
+  }, [props.auth])
 
   const setCurrentIcon = (e) => {
     if (e.currentTarget.id === 'profile-cta') {

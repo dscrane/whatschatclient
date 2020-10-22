@@ -16,12 +16,15 @@ import {
 
 /* ----   FETCH_CHATROOMS ACTION CREATOR    ---- */
 export const fetchChatrooms = () => async (dispatch, getState) => {
+  console.log('get state', getState())
   try {
     const response = await api.get('/chatrooms/fetch');
 
-    const chatrooms = response.data.chats.map(chat => {
-      const messages = getState().chatrooms.length !== 0 ? getState().chatrooms[chat._id].messages : [];
-      return { ...chat, messages: [...messages] }
+    const chatrooms = response.data.chatrooms.map(chatroom => {
+      console.log('response chatroom', chatroom)
+      const messages = getState().chatrooms.length !== 0 ? getState().chatrooms[chatroom._id].messages : [];
+      console.log('fetchChatroom messages', messages)
+      return { ...chatroom, messages: [...messages] }
     })
 
     dispatch({
@@ -43,9 +46,9 @@ export const createChatroom = (name, userId) => async dispatch => {
     )
     dispatch({
                type: CREATE_CHATROOM,
-               payload: {...data.chat, messages: []}
+               payload: {...data.chatroom, messages: []}
              })
-    history.push(`/chats/${data.chat._id}`)
+    history.push(`/chats/${data.chatroom._id}`)
   } catch (e) {
     dispatch({
                type: 'ERROR',

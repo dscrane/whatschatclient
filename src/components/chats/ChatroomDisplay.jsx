@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 
 const ChatroomDisplay = ({ messages, auth }) => {
+  console.log(messages)
   const messageList = useRef(null);
 
   const autoscroll = () => {

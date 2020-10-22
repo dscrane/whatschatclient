@@ -14,6 +14,10 @@ const ChatContainer = ({ auth, chatrooms, fetchMessages }) => {
     })
   }, [])
 
+  if (!chatrooms[auth.currentChatroom]) {
+    return <></>
+  }
+
   const onChange = e => {
     setMessage(e.target.value)
   }

@@ -4,6 +4,7 @@ import {ChatContainer} from "../components/chats";
 
 
 const Chatroom = ({ chatrooms }) => {
+
    const renderChatContainer = chatrooms.length !== 0 ? <ChatContainer /> : <div>Click on a chat room to enter</div>
 
   return(

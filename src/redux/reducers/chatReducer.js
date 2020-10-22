@@ -5,6 +5,7 @@ import {
   SEND_MESSAGE,
   FETCH_MESSAGES,
   CLOSE_CHAT,
+  LOG_OUT
 } from '../types';
 
 const INITIAL_STATE = [];
@@ -34,6 +35,10 @@ export default (state = INITIAL_STATE, action) => {
           ]
         }
       }
+    case LOG_OUT:
+      return [
+       ...INITIAL_STATE
+      ]
     default:
       return state
   }

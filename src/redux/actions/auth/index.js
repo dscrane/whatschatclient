@@ -76,10 +76,10 @@ export const userLogin = formValues => async dispatch => {
     { ...formValues }
   )
 
-  localStorage.setItem('jwt-token', response.data.token)
+  await localStorage.setItem('jwt-token', response.data.token)
 
   dispatch({
-    type: LOG_IN,
+    type: CHECK_AUTH,
     payload: {
       _id: response.data.user._id,
       token: response.data.token,
