@@ -232,6 +232,10 @@
           justify-content: end;
         }
 
+        .chat__messages-system {
+          justify-content: center;
+        }
+
         .chat__bubble {
           border-radius: 10px;
           max-width: 45%;

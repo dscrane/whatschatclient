@@ -3,7 +3,6 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { ChatContainer } from "../components/chats";
 
-
 const Chatroom = ({ chatrooms }) => {
   const renderChatContainer =
     chatrooms.length !== 0 ? (

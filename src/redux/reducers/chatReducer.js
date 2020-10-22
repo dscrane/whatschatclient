@@ -42,10 +42,10 @@ export default (state = INITIAL_STATE, action) => {
           ...state[action.payload.chatroomId],
           messages: [
             ...state[action.payload.chatroomId].messages,
-            action.payload.message
-          ]
-        }
-      }
+            action.payload.message,
+          ],
+        },
+      };
     case LOG_OUT:
       return [...INITIAL_STATE];
     default:

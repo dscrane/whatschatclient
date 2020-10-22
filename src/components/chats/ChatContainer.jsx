@@ -1,11 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { fetchMessages, joinChatroom, sendMessage, leaveChatroom } from "../../redux/actions/chat";
+import {
+  fetchMessages,
+  joinChatroom,
+  sendMessage,
+  leaveChatroom,
+} from "../../redux/actions/chat";
 import { default as ChatroomDisplay } from "./ChatroomDisplay";
 
-const ChatContainer = ({ auth, chatrooms, fetchMessages, joinChatroom, sendMessage, leaveChatroom }) => {
+const ChatContainer = ({
+  auth,
+  chatrooms,
+  fetchMessages,
+  joinChatroom,
+  sendMessage,
+  leaveChatroom,
+}) => {
   const [message, setMessage] = useState("");
-  const [activeChatroom, setActiveChatroom] = useState(auth.currentChatroom)
+  const [activeChatroom, setActiveChatroom] = useState(auth.currentChatroom);
 
   useEffect(() => {
     Object.keys(chatrooms).forEach((chatroom) => {
@@ -14,12 +26,10 @@ const ChatContainer = ({ auth, chatrooms, fetchMessages, joinChatroom, sendMessa
   }, []);
 
   useEffect(() => {
-    leaveChatroom(activeChatroom, auth.user.username)
-    joinChatroom(auth.currentChatroom, auth.user.username)
-    setActiveChatroom(auth.currentChatroom)
-  }, [auth.currentChatroom, auth.user.username])
-
-
+    leaveChatroom(activeChatroom, auth.user.username);
+    joinChatroom(auth.currentChatroom, auth.user.username);
+    setActiveChatroom(auth.currentChatroom);
+  }, [auth.currentChatroom, auth.user.username]);
 
   if (!chatrooms[auth.currentChatroom]) {
     return <></>;
@@ -35,9 +45,9 @@ const ChatContainer = ({ auth, chatrooms, fetchMessages, joinChatroom, sendMessa
       message,
       chatroomId: auth.currentChatroom,
       userId: auth._id,
-      author: auth.user.username
-    })
-    setMessage('')
+      author: auth.user.username,
+    });
+    setMessage("");
   };
 
   return (
@@ -81,4 +91,9 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { fetchMessages, joinChatroom, sendMessage, leaveChatroom })(ChatContainer);
+export default connect(mapStateToProps, {
+  fetchMessages,
+  joinChatroom,
+  sendMessage,
+  leaveChatroom,
+})(ChatContainer);

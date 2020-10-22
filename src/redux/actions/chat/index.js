@@ -1,7 +1,7 @@
 import api from "../../../utils/api";
 import { store } from "../../../utils/store";
 import history from "../../../utils/history";
-import socket from "../../../utils/socket"
+import socket from "../../../utils/socket";
 import {
   FETCH_CHATROOMS,
   SET_CHATROOM,
@@ -65,38 +65,41 @@ export const fetchMessages = (chatroomId) => async (dispatch) => {
 /* ----   ****    ---- */
 
 /* ----   JOIN_CHATROOM ACTION CREATOR    ---- */
-export const joinChatroom = (chatroomId, username) => async dispatch => {
-  console.log('join emitter ran')
-  socket.emit('join', { room: chatroomId, username: username }, (room) => {
-    console.info(`connected to ${room}`)
-  })
-}
+export const joinChatroom = (chatroomId, username) => async (dispatch) => {
+  console.log("join emitter ran");
+  socket.emit("join", { room: chatroomId, username: username }, (room) => {
+    console.info(`connected to ${room}`);
+  });
+};
 /* ----   ****    ---- */
 
 /* ----   LEAVE_CHATROOM ACTION CREATOR    ---- */
-export const leaveChatroom = (chatroomId, username) => async dispatch  => {
-  socket.emit('leave', { room: chatroomId, username: username }, room => {
-    console.log(`leaving ${room}`)
-  })
-}
+export const leaveChatroom = (chatroomId, username) => async (dispatch) => {
+  socket.emit("leave", { room: chatroomId, username: username }, (room) => {
+    console.info(`disconnected from ${room}`);
+  });
+};
 /* ----   ****    ---- */
 
 /* ----   NEW_MESSAGE ACTION CREATOR    ---- */
-export const sendMessage = ({ chatroomId, message, userId, author }) => async dispatch => {
-  console.log('send message ran')
-  socket.emit('message', { chatroomId, message, userId, author })
-}
+export const sendMessage = ({ chatroomId, message, userId, author }) => async (
+  dispatch
+) => {
+  socket.emit("message", { chatroomId, message, userId, author });
+};
 
 const dispatchMessage = (messageType, message) => {
-  return { type: messageType, payload: {chatroomId: message.chatroomId, message: message} }
-}
+  return {
+    type: messageType,
+    payload: { chatroomId: message.chatroomId, message: message },
+  };
+};
 
-socket.on('return-message', returnMsg => {
-  console.log('return-message hit')
-  store.dispatch(dispatchMessage(RECEIVE_MESSAGE, returnMsg))
-})
+socket.on("return-message", (returnMsg) => {
+  store.dispatch(dispatchMessage(RECEIVE_MESSAGE, returnMsg));
+});
 
-socket.on('system-message', systemMessage => {
-  store.dispatch(dispatchMessage(RECEIVE_MESSAGE, systemMessage))
-})
+socket.on("system-message", (systemMessage) => {
+  store.dispatch(dispatchMessage(RECEIVE_MESSAGE, systemMessage));
+});
 /* ----   ****    ---- */

@@ -49,7 +49,7 @@ const ChatroomDisplay = ({ messages, auth }) => {
         return (
           <li
             key={Math.random() * 1000}
-            className="chat__message chat__message-system"
+            className="chat__messages chat__messages-system"
           >
             <div key={messageKey} className="text-white text-left">
               {messages[messageKey].message}
