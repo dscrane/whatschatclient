@@ -42,12 +42,17 @@ const SidebarChats = ({
     }
     return Object.keys(chatrooms).map((key) => {
       return (
-        <li key={key} className="chatroom__item">
+        <li
+          key={key}
+          className={`chatroom__item ${
+            auth.currentChatroom === key ? "chatroom__item-active" : ""
+          }`}
+        >
           <div className="chatroom__icon col-2 my-auto text-secondary">
             {profileIcon}
           </div>
           <div className="col-8 px-0">
-            <div className="col text-center text-white">
+            <div className="col text-center text-white h-100">
               <div
                 onClick={() => renderChatroom(key)}
                 className="chatroom__chatroom"

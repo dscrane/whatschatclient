@@ -69,7 +69,11 @@ const Sidebar = (props) => {
         <div className="sidebar__row">
           <div className="sidebar__break"></div>
         </div>
-        <div className="sidebar__row">{renderSidebarContent()}</div>
+        <div className="sidebar__row sidebar__row-scroll">
+          <div className="sidebar__container sidebar__container-scroll">
+            {renderSidebarContent()}
+          </div>
+        </div>
       </nav>
     </div>
   );
