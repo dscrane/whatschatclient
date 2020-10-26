@@ -38,7 +38,7 @@ const Sidebar = (props) => {
   const renderSidebarContent = () => {
     if (!props.auth) {
       return (
-        <div>
+        <div className="sidebar__default">
           Sign In or Create an account to see available rooms and profile
         </div>
       );

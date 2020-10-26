@@ -29,9 +29,18 @@
       justify-content: center;
     }
 
-    .sidebar__container {
-      width: 95%
+    .sidebar__default {
+      width: 75%;
+      color: white;
+      text-align: center;
     }
+
+    .sidebar__container {
+      width: 95%;
+      display: flex;
+      justify-content: center;
+    }
+
     .sidebar__row-scroll {
       height: 100%;
       overflow: auto;
